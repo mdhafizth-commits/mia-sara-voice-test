@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mia Sara - Ujian Mikrofon</title>
+  <style>
+    body {
+      background: #151522;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 45px 20px;
+    }
+    button {
+      background: #d94e91;
+      color: white;
+      border: 0;
+      border-radius: 15px;
+      padding: 18px;
+      font-size: 18px;
+    }
+    #status {
+      margin-top: 25px;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <h2>💕 Mia Sara</h2>
+  <p>PROJECT N.A.D.I.A</p>
+  <p>Ujian mikrofon Apis sayang 🎙️</p>
+
+  <button onclick="testMic()">
+    🎤 Semak Mikrofon
+  </button>
+
+  <p id="status">Belum diuji</p>
+
+  <script>
+    async function testMic() {
+      const status = document.getElementById("status");
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({
+          audio: true
+        });
+        status.textContent = "✅ Mikrofon berjaya! Mia boleh menerima audio melalui pelayar.";
+        stream.getTracks().forEach(track => track.stop());
+      } catch (error) {
+        status.textContent = "❌ " + error.name + ": " + error.message;
+      }
+    }
+  </script>
+</body>
+</html>
